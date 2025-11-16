@@ -1,0 +1,133 @@
+﻿@model WebApplication1.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Дашборд";
+}
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>@Model.TotalPatients</h4>
+                        <p class="mb-0">Всего пациентов</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>@Model.TodayAppointments</h4>
+                        <p class="mb-0">Приемы сегодня</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-calendar-day fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>@Model.ActiveMedicalCases</h4>
+                        <p class="mb-0">Активные случаи</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-file-medical fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>@Model.PendingLaboratoryResults</h4>
+                        <p class="mb-0">Ожидают анализы</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-vial fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-clock"></i> Ближайшие приемы
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.RecentAppointments.Any())
+                {
+                    <div class="list-group">
+                        @foreach (var appointment in Model.RecentAppointments)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">@appointment.PatientName</h6>
+                                    <small class="text-muted">@appointment.AppointmentDateTime.ToString("HH:mm")</small>
+                                </div>
+                                <p class="mb-1">@appointment.Notes</p>
+                                <small class="text-muted">Статус: <span class="badge bg-@appointment.StatusColor">@appointment.Status</span></small>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">Нет запланированных приемов</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-plus"></i> Недавно добавленные пациенты
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (Model.RecentPatients.Any())
+                {
+                    <div class="list-group">
+                        @foreach (var patient in Model.RecentPatients)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">@patient.FullName</h6>
+                                    <small class="text-muted">@patient.Age лет</small>
+                                </div>
+                                <p class="mb-1">@patient.PhoneNumber</p>
+                                <small class="text-muted">Зарегистрирован: @patient.RegistrationDate.ToString("dd.MM.yyyy")</small>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">Нет недавно добавленных пациентов</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
