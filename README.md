@@ -5,6 +5,5 @@
 
 ## Предметная область  
 Медицинская практика поликлиники.
-```
-<img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/8b3b2461-a28f-413e-80ba-0d8e55a9de3d" />
-```
+
+<img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/39e0a752-6c0d-41dd-ac33-8a6ffc4c3ca5" />
